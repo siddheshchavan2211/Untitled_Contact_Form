@@ -1,10 +1,21 @@
+import {
+  IconBrandFacebook,
+  IconBrandGithub,
+  IconBrandLinkedin,
+  IconBrandInstagram,
+} from "@tabler/icons-react";
+import Header from "../src/Components/Header";
+import Form from "../src/Components/Form";
+import Aside from "../src/Components/Aside";
+
 function App() {
   return (
     <>
-      <h1 className="bg-red-400 text-6xl sm:bg-amber-400 md:bg-slate-400 lg:bg-green-400">
-        {" "}
-        hello
-      </h1>
+      <Header />
+      <div className="flex">
+        <Aside />
+        <Form />
+      </div>
     </>
   );
 }
