@@ -1,18 +1,21 @@
-import { RiMagicLine } from "react-icons/ri";
+import { RiSparklingFill } from "react-icons/ri";
+import Intro from "./Intro";
 const Form = () => {
+  const services = [
+    "Website Design",
+    "Content",
+    "UX Design",
+    "Strategy",
+    "User Research",
+    "Other",
+  ];
+
   return (
     <>
-      {/* Intro */}
-      <h1 className="mb-3 text-3xl font-bold">
-        Got Ideas? <RiMagicLine className="inline-block" /> We've got <br /> the
-        skills. Let's team up.
-      </h1>
-      <p className="mb-6 text-xl">
-        Tell us more about yourself and what's on your mind.
-      </p>
+      <Intro />
 
       {/* Inputs */}
-      <form className="flex flex-col gap-1">
+      <form onClick={(e) => e.preventDefault()} className="flex flex-col gap-1">
         <input
           type="text"
           name="fullname"
@@ -32,13 +35,32 @@ const Form = () => {
           name="message"
           id="message"
           placeholder="Tell us a bit about your project..."
-          className="mb-4 h-24 border-b border-stone-700 p-2 placeholder-gray-700 md:bg-lime-300"
+          className="h-24 border-b border-stone-700 p-2 placeholder-gray-700 md:bg-lime-300"
         />
-        <p className="text-gray-700">How can we help?</p>
 
-        
+        <p className="my-5 text-gray-800">How can we help?</p>
+
+        <div className="mb-5 grid max-w-96 grid-cols-2">
+          {services.map((service, idx) => {
+            return (
+              <label key={idx} className="flex cursor-pointer gap-2">
+                <input type="checkbox" name="" id="" className="size-5" />{" "}
+                {service}
+              </label>
+            );
+          })}
+        </div>
+
+        <button
+          type="submit"
+          className="flex items-center justify-center gap-2 rounded bg-zinc-950 p-2 text-white"
+        >
+          Let's get started{" "}
+          <RiSparklingFill className="text-lime-500" size={20} />{" "}
+        </button>
       </form>
     </>
   );
 };
+
 export default Form;
