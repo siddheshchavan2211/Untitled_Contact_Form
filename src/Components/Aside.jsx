@@ -38,7 +38,7 @@ const Aside = () => {
         {contactInfo.map((data) => {
           return (
             <>
-              <div className="mb-5">
+              <div className="mb-5" key={data.id}>
                 <data.icon size={25} />
 
                 <h3 className="text-lg font-bold">{data.title}</h3>
