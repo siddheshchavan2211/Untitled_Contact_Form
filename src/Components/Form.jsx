@@ -1,7 +1,7 @@
 import { RiSparklingFill } from "react-icons/ri";
 import Intro from "./Intro";
 import { useRef, useState } from "react";
-
+import config from "../utils/config";
 const Form = () => {
   //take all values onsubmit consolelogg
   const services = [
@@ -16,6 +16,7 @@ const Form = () => {
   const email = useRef();
   const message = useRef();
   const checkbox = useRef();
+
   const [selectedServices, setSelectedServices] = useState([]);
   const handleCheckbox = (value, checked) => {
     setSelectedServices((prevState) => {
@@ -39,29 +40,29 @@ const Form = () => {
       <Intro />
 
       {/* Inputs */}
-      <form onSubmit={formsubmit} className="flex flex-col gap-1">
+      <form action={config.submitUrl} className="flex flex-col gap-1">
         <input
           type="text"
-          name="fullname"
+          name={config.fullName}
           id="fullname"
           placeholder="Your name"
-          className="border-b border-stone-700 p-2 placeholder-gray-700 md:bg-lime-300"
+          className="border-b border-stone-700 p-2 placeholder-gray-700 md:bg-sky-300"
           ref={name}
         />
         <input
           type="email"
-          name="email"
+          name={config.email}
           id="email"
           placeholder="you@company.com"
-          className="border-b border-stone-700 p-2 placeholder-gray-700 md:bg-lime-300"
+          className="border-b border-stone-700 p-2 placeholder-gray-700 md:bg-sky-300"
           ref={email}
         />
         <input
           type="text"
-          name="message"
+          name={config.message}
           id="message"
           placeholder="Tell us a bit about your project..."
-          className="h-24 border-b border-stone-700 p-2 placeholder-gray-700 md:bg-lime-300"
+          className="h-24 border-b border-stone-700 p-2 placeholder-gray-700 md:bg-sky-300"
           ref={message}
         />
 
@@ -73,10 +74,11 @@ const Form = () => {
               <label key={idx} className="flex cursor-pointer gap-2">
                 <input
                   type="checkbox"
-                  name=""
+                  name={config.userResponse}
                   id=""
                   className="size-5"
                   ref={checkbox}
+                  value="TESTING"
                   onClick={(e) => handleCheckbox(service, e.target.checked)}
                 />
                 {service}

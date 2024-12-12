@@ -11,7 +11,7 @@ function App() {
           <div className="col-span-2 hidden md:block">
             <Aside />
           </div>
-          <div className="col-span-full bg-lime-300 p-5 md:col-span-6">
+          <div className="col-span-full bg-sky-300 p-5 md:col-span-6">
             <Form />
           </div>
         </main>

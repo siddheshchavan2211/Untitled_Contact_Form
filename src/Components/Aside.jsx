@@ -49,7 +49,7 @@ const Aside = () => {
           );
         })}
       </div>
-      <div className="flex-start flex gap-2 text-lime-700">
+      <div className="flex-start flex gap-2 text-sky-700">
         <RiFacebookBoxLine size={25} />
         <RiTwitterXFill size={25} />
         <RiLinkedinBoxLine size={25} />
