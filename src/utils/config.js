@@ -1,5 +1,5 @@
 export default {
-  fullName: import.meta.env.VITE_FULLNAME,
+  fullname: import.meta.env.VITE_FULLNAME,
   email: import.meta.env.VITE_EMAIL,
   message: import.meta.env.VITE_MESSAGE,
   services: import.meta.env.VITE_SERVICES,

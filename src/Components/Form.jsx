@@ -2,6 +2,8 @@ import { RiSparklingFill } from "react-icons/ri";
 import Intro from "./Intro";
 
 import { useForm } from "react-hook-form";
+import config from "../utils/config";
+import spamDetect from "../utils/spamDetect";
 const Form = () => {
   //take all values onsubmit consolelogg
   const services = [
@@ -16,7 +18,36 @@ const Form = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      fullname: "",
+      email: "",
+      message: "",
+      services: [],
+    },
+  });
+
+  const handleFormSubmit = async (data) => {
+    const spamCheck = await spamDetect(data.message);
+
+    if (spamCheck.isProfanity) {
+      console.log("Dont use bad words");
+    } else {
+      const formData = new FormData();
+      formData.append(config.fullname, data.fullname);
+      formData.append(config.email, data.email);
+      formData.append(config.message, data.message);
+      formData.append(config.services, data.services);
+
+      fetch(config.submitUrl, {
+        method: "POST",
+        mode: "no-cors",
+        body: formData,
+      }).then(() => {
+        console.log("Form submit hogya!");
+      });
+    }
+  };
 
   return (
     <>
@@ -24,9 +55,7 @@ const Form = () => {
 
       {/* Inputs */}
       <form
-        onSubmit={handleSubmit((e) => {
-          console.log(e);
-        })}
+        onSubmit={handleSubmit(handleFormSubmit)}
         className="flex flex-col gap-1"
       >
         <input
@@ -44,12 +73,13 @@ const Form = () => {
           id="email"
           placeholder="you@company.com"
           className="border-b border-stone-700 p-2 placeholder-gray-700 md:bg-sky-300"
-          {...register("email", { required: "please enter your email",
+          {...register("email", {
+            required: "please enter your email",
             pattern: {
               value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
               message: "invalid email",
             },
-           })}
+          })}
         />
         {errors.email && <p className="text-red-500">{errors.email.message}</p>}
         <input
