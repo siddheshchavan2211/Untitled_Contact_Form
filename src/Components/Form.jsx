@@ -4,8 +4,10 @@ import Intro from "./Intro";
 import { useForm } from "react-hook-form";
 import config from "../utils/config";
 import spamDetect from "../utils/spamDetect";
+import { useState } from "react";
 const Form = () => {
   //take all values onsubmit consolelogg
+  const [profanityalert, setProfanityalert] = useState(false);
   const services = [
     "Website Design",
     "Content",
@@ -31,7 +33,8 @@ const Form = () => {
     const spamCheck = await spamDetect(data.message);
 
     if (spamCheck.isProfanity) {
-      console.log("Dont use bad words");
+      console.log("Dont use bad words", spamCheck);
+      setProfanityalert(spamCheck.flaggedFor);
     } else {
       const formData = new FormData();
       formData.append(config.fullname, data.fullname);
@@ -98,6 +101,7 @@ const Form = () => {
         {errors.message && (
           <p className="text-red-500">{errors.message.message}</p>
         )}
+        {profanityalert}
         <p className="my-5 text-gray-800">How can we help?</p>
 
         <div className="mb-5 grid max-w-96 grid-cols-2">
